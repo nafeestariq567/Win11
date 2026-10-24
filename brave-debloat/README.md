@@ -9,7 +9,7 @@
 To apply this entire debloat configuration on any fresh Windows install in seconds, open **PowerShell as Administrator** and paste:
 
 ```powershell
-irm https://raw.githubusercontent.com/nafeestariq567/BraveDebloat/main/Apply-BraveDebloat.ps1 | iex
+irm https://raw.githubusercontent.com/nafeestariq567/Win11/main/brave-debloat/Apply-BraveDebloat.ps1 | iex
 ```
 
 ---

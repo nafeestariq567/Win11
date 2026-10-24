@@ -5,10 +5,10 @@
     Full debloating, optimization, and privacy hardening script for Windows 11 Pro 64-bit.
     Tailored for: Software Engineers / Power Users on Acer Predator Laptops.
     Compatible with:
-      irm https://raw.githubusercontent.com/nafeestariq567/Win11Debloat/main/Apply-Win11Debloat.ps1 | iex
+      irm https://raw.githubusercontent.com/nafeestariq567/Win11/main/win11-debloat/Apply-Win11Debloat.ps1 | iex
 .NOTES
     Author: nafeestariq567
-    Repository: https://github.com/nafeestariq567/Win11Debloat
+    Repository: https://github.com/nafeestariq567/Win11
 #>
 
 [CmdletBinding()]

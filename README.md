@@ -1,65 +1,81 @@
 # Windows 11 Master Suite (`Win11`)
 
-A centralized, forensic-grade engineering suite containing diagnostic repair toolkits, debloat pipelines, and power optimizations for Windows 11.
-
-Curated and verified on an **Acer Predator Laptop (Windows 11 Pro 64-bit, Build `26300` / 24H2 GE release)**.
+A centralized, forensic-grade engineering repository containing all diagnostic repairs, debloat pipelines, and system optimizations for Windows 11 maintained by **nafeestariq567**.
 
 ---
 
 ## 🧭 Repository Index & Quick Launch
 
-| Module | Description | Standalone Repo | 1-Liner Quick Fix / Run |
-|---|---|---|---|
-| **[Taskbar Sleep Fix](taskbar-sleep-fix/)** | Fixes taskbar icons turning blank/invisible after system sleep on multi-GPU (Intel + NVIDIA) & mixed-refresh (144Hz + 60Hz) setups. | [Windows11-Taskbar-Sleep-Fix](https://github.com/nafeestariq567/Windows11-Taskbar-Sleep-Fix) | `irm https://raw.githubusercontent.com/nafeestariq567/Windows11-Taskbar-Sleep-Fix/main/Fix_Taskbar_Sleep_Icons.ps1 \| iex` |
-| **[PIN Corruption Resolver](pin-fix/)** | Fixes recurring Windows Hello PIN unavailability (`0xD000A002`, Event ID 7002) triggered by 3-hour sleep-to-hibernate resume crashes. | [Windows11-PIN-Fix](https://github.com/nafeestariq567/Windows11-PIN-Fix) | `irm https://raw.githubusercontent.com/nafeestariq567/Windows11-PIN-Fix/main/Fix_Windows_Hello_PIN.ps1 \| iex` |
-| **[Win11 Debloat Suite](win11-debloat/)** | Modular, safety-first debloat pipeline: safety baseline, privacy/telemetry hardening, bloatware purge, and service optimization. | [Win11Debloat](https://github.com/nafeestariq567/Win11Debloat) | `irm https://raw.githubusercontent.com/nafeestariq567/Win11Debloat/main/Apply-Win11Debloat.ps1 \| iex` |
-| **[Brave Browser Debloat](brave-debloat/)** | Privacy-first debloater and telemetry hardener for Brave and Brave Beta on Windows 11. | [BraveDebloat](https://github.com/nafeestariq567/BraveDebloat) | `irm https://raw.githubusercontent.com/nafeestariq567/BraveDebloat/main/Apply-BraveDebloat.ps1 \| iex` |
+| Module | Description | 1-Liner Quick Fix / Run Command |
+|---|---|---|
+| **[`taskbar-sleep-fix/`](taskbar-sleep-fix/)** | Fixes taskbar icons turning blank/invisible after system sleep on multi-GPU (Intel + NVIDIA) & mixed-refresh (144Hz + 60Hz) setups. | `irm https://raw.githubusercontent.com/nafeestariq567/Win11/main/taskbar-sleep-fix/Fix_Taskbar_Sleep_Icons.ps1 \| iex` |
+| **[`pin-fix/`](pin-fix/)** | Fixes recurring Windows Hello PIN unavailability (`0xD000A002`, Event ID 7002) triggered by 3-hour sleep-to-hibernate resume crashes. | `irm https://raw.githubusercontent.com/nafeestariq567/Win11/main/pin-fix/Fix_Windows_Hello_PIN.ps1 \| iex` |
+| **[`win11-debloat/`](win11-debloat/)** | Modular, safety-first debloat pipeline: safety baseline, privacy/telemetry hardening, bloatware purge, and service optimization. | `irm https://raw.githubusercontent.com/nafeestariq567/Win11/main/win11-debloat/Apply-Win11Debloat.ps1 \| iex` |
+| **[`brave-debloat/`](brave-debloat/)** | Privacy-first debloater and telemetry hardener for Brave and Brave Beta on Windows 11. | `irm https://raw.githubusercontent.com/nafeestariq567/Win11/main/brave-debloat/Apply-BraveDebloat.ps1 \| iex` |
 
 ---
 
-## 📁 Modules Breakdown
+## 🏗️ Repository Architecture & Design Philosophy
 
-### 1. [Taskbar Sleep Fix (`taskbar-sleep-fix/`)](taskbar-sleep-fix/)
-- **The Problem:** Upon waking Windows 11 from sleep, some application icons (Chrome, File Explorer, Brave, Slack, etc.) disappear or become invisible transparent boxes with tooltips.
-- **Root Cause:** 
-  - PCIe Link State Power Management (ASPM) set to Maximum Power Savings on AC power, causing the dedicated NVIDIA GPU to lag on wake.
-  - DirectX Graphics Kernel watchdog triggers `LiveKernelEvent 141` (`VIDEO_ENGINE_TDR_TIMEOUT`).
-  - DWM presentation swap chains drop XAML DirectComposition surfaces, leaving WinUI button icons in a `Collapsed` state until an interaction event (`WM_SETTEXT` or mouse click) forces a redraw.
-  - Explorer icon cache databases (`iconcache*.db`) were 5 months out of date.
-- **The Fix:**
-  - Sets PCIe ASPM to `0` (Off) on AC power (eliminates TDR 141; preserves `2` on DC for 0 battery drain).
-  - Wipes and rebuilds the Explorer icon cache databases.
-  - Includes [`Refresh_Taskbar.cmd`](taskbar-sleep-fix/Refresh_Taskbar.cmd) for 1-click sub-second shell reloads.
+This repository is organized to serve as the **single home** for any Windows 11 task on this PC:
 
-### 2. [Windows Hello PIN Corruption Resolver (`pin-fix/`)](pin-fix/)
-- **The Problem:** Lock screen recurrently rejects PIN with *"Something happened and your PIN isn't available. Click to set up your PIN again"* (`0xD000A002`). Settings cannot modify or remove the PIN.
-- **Root Cause:**
-  - Windows default power plan attempts an automated sleep-to-hibernate transition after 3 hours (`HIBERNATEIDLE = 10,800s`).
-  - Laptop NVMe controller fails resume (`0xC0000225`), causing dirty kernel crash reboots (`Kernel-Power 41`).
-  - The crash corrupts the TPM 2.0 unwrap authorization and the encrypted `Ngc` container keys on disk.
-- **The Fix:**
-  - Takes administrative ownership and purges damaged `Ngc` cryptographic containers.
-  - Sets `HIBERNATEIDLE` to `0` (Never) on AC and DC to neutralize the crash trigger.
-  - Launches clean PIN provisioning.
+```text
+C:\Win11\
+├── README.md                          # Master catalog, 1-liner commands, and architecture
+├── START_HERE.md                      # AI Agent Operating Protocol & Task Router
+├── SYSTEM_SPECS.md                    # Single Source of Truth for verified hardware & OS
+│
+├── taskbar-sleep-fix/                 # Taskbar Sleep Icon Disappearance Resolver
+│   ├── README.md                      # Forensic analysis, TDR 141 breakdown & instructions
+│   ├── Fix_Taskbar_Sleep_Icons.ps1    # Automated repair script
+│   ├── Refresh_Taskbar.cmd            # 1-click sub-second shell reload launcher
+│   ├── START_HERE.md                  # Module quick start
+│   └── assets/                        # Multi-monitor & community bug screenshots
+│
+├── pin-fix/                           # Windows Hello PIN Corruption Resolver
+│   ├── README.md                      # Event 7002 & 3-hour hibernate crash breakdown
+│   ├── Fix_Windows_Hello_PIN.ps1      # Automated cryptographic key & power repair script
+│   ├── Run_Fix_PIN_Admin.cmd          # Self-elevating 1-click execution wrapper
+│   ├── CONTEXT_AND_TRANSCRIPT.md      # Deep technical investigation history
+│   ├── START_HERE.md                  # Module quick start
+│   └── assets/                        # Original error photo
+│
+├── win11-debloat/                     # Windows 11 Master Debloat Suite
+│   ├── README.md                      # Guiding principles, phase breakdown & documentation
+│   ├── Apply-Win11Debloat.ps1         # 1-liner all-in-one debloat runner
+│   ├── 01_Create_Safety_Baseline.ps1  # Restore point & registry export
+│   ├── 02_Apply_Privacy_And_Ads_Hardening.ps1 # Telemetry & ad disablement
+│   ├── 03_Remove_Bloatware_Apps.ps1   # Provisioned AppX purge
+│   ├── 04_Apply_UI_And_Services.ps1   # Background service & UI optimizer
+│   ├── Run_All_Restore_Admin.cmd      # Complete 1-click restore wrapper
+│   └── Backups/                       # Pre-debloat system state backups
+│
+└── brave-debloat/                     # Brave Browser Debloat Suite
+    ├── README.md                      # Policy breakdown & user choices
+    ├── Apply-BraveDebloat.ps1         # Policy enforcer script
+    ├── BraveDebloat.reg               # Direct registry policy tweaks
+    ├── BraveRestore.reg               # Full restoration registry file
+    └── Run-Debloat.cmd                # 1-click execution wrapper
+```
 
-### 3. [Windows 11 Debloat Suite (`win11-debloat/`)](win11-debloat/)
-- **Phase 1: Safety Baseline:** Creates System Restore Point, exports registry backups, and catalogs installed packages.
-- **Phase 2: Privacy & Telemetry Hardening:** Disables diagnostic telemetry, Cortana, advertising ID, Feedback Hub, and telemetry scheduled tasks.
-- **Phase 3: Bloatware Purge:** Safely uninstalls non-essential preinstalled UWP provisioned packages and OEM bloat.
-- **Phase 4: UI & Service Optimization:** Re-aligns taskbar, disables background app resource hogs, and streamlines context menus. Full 1-click rollback scripts included.
-
-### 4. [Brave Browser Debloat (`brave-debloat/`)](brave-debloat/)
-- Strips out telemetry, Brave Rewards/Wallet/VPN background hooks, sponsored images, and unnecessary bloat services while preserving full browsing performance and extension compatibility.
-- Includes automated 1-click installer and rollback scripts.
+### Separation of Concerns:
+1. **Root Level (`C:\Win11\`):** Holds global specifications ([`SYSTEM_SPECS.md`](SYSTEM_SPECS.md)), the AI Agent Router ([`START_HERE.md`](START_HERE.md)), and master catalog ([`README.md`](README.md)).
+2. **Subfolder Level (`C:\Win11\<module>\`):** Every module is completely self-contained with its own executable scripts, documentation, and assets.
+3. **Adding New Tasks:** Any future Windows 11 task that does not fit into existing modules gets its own clean subfolder inside `C:\Win11/`, keeping the root organized.
 
 ---
 
-## 💻 Host System Architecture
+## 💻 Verified Host Hardware & OS Profile
 
-- **Machine:** Acer Predator PH317-53 Laptop
-- **OS:** Windows 11 Professional 64-bit (Build `26300` / 24H2)
-- **CPU / Memory:** Intel Core i7-9750H @ 2.60GHz, 16 GB DDR4 RAM
-- **Graphics 1 (Internal Panel @ 144 Hz):** Intel(R) UHD Graphics 630
-- **Graphics 2 (External Display @ 60 Hz):** NVIDIA GeForce RTX 2070 with Max-Q Design
-- **Security Hardware:** Intel Platform Trust Technology (TPM 2.0)
-- **Power Configuration:** S3 Sleep with Hybrid Sleep disabled, Hibernate idle set to 0.
+Full specifications are maintained in [`SYSTEM_SPECS.md`](SYSTEM_SPECS.md):
+
+- **Device:** Acer Predator PH317-53 Laptop (`DESKTOP-7LV0LO3`)
+- **OS:** Windows 11 Pro 64-bit, Version **26H2**, Build **`26300.9711`** (Experience Pack `1000.26100.372.0`)
+- **Processor:** Intel Core i7-9750H @ 2.60GHz (6 Cores, 12 Threads)
+- **RAM:** **32.0 GB** (31.8 GB usable) @ 2667 MHz
+- **Dedicated GPU:** NVIDIA GeForce RTX 2070 with Max-Q Design (8 GB VRAM)
+- **Integrated GPU:** Intel UHD Graphics 630 (128 MB VRAM)
+- **Storage:** 1.38 TB NVMe SSD (939 GB used)
+- **Displays:**
+  - Display 1: Internal 17.3" Panel (`AUO409D`) @ **144 Hz** (Intel iGPU)
+  - Display 2: External Lenovo Monitor (`LEN60A8`) @ **60 Hz** (NVIDIA dGPU)

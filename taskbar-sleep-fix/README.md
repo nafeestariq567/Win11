@@ -11,7 +11,7 @@ Tailored and verified on an **Acer Predator Gaming Laptop (Windows 11 Pro 64-bit
 To resolve this issue immediately on any affected Windows 11 PC, open **PowerShell as Administrator** and paste:
 
 ```powershell
-irm https://raw.githubusercontent.com/nafeestariq567/Windows11-Taskbar-Sleep-Fix/main/Fix_Taskbar_Sleep_Icons.ps1 | iex
+irm https://raw.githubusercontent.com/nafeestariq567/Win11/main/taskbar-sleep-fix/Fix_Taskbar_Sleep_Icons.ps1 | iex
 ```
 
 ---

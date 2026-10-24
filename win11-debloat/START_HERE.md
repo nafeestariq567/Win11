@@ -1,34 +1,28 @@
-# Start Here: Resuming in a Fresh Chat
+# Module Quick Start: Windows 11 Debloat Suite (`win11-debloat/`)
 
-Follow these simple steps to continue Windows 11 debloating in a fresh chat session:
+This module contains the 4-phase debloat pipeline, privacy hardening routines, provisioned AppX bloatware uninstaller, and safety rollback scripts.
+
+> [!TIP]
+> Global host architecture and verified system specs are maintained in the root file: [`../SYSTEM_SPECS.md`](../SYSTEM_SPECS.md).
+> AI Agent operating protocols are in: [`../START_HERE.md`](../START_HERE.md).
 
 ---
 
-### Step 1: Open a New Chat
+## 1. Quick Launch (One-Liner)
 
-Open your terminal or UI in the target folder:
 ```powershell
-cd "C:\Debloat Windows 11"
+irm https://raw.githubusercontent.com/nafeestariq567/Win11/main/win11-debloat/Apply-Win11Debloat.ps1 | iex
 ```
 
 ---
 
-### Step 2: Paste the Kick-Off Prompt
+## 2. File Index
 
-Send this prompt in the new chat:
-
-```text
-Let's continue Windows 11 debloating. We are working inside C:\Debloat Windows 11.
-Please read README.md, PREFERENCES_CHECKLIST.md, and WIN11_DEBLOAT_ROADMAP.md.
-Let's first review my preferences and perform the Step 1 safety baseline (Restore Point + Registry Backup).
-```
-
----
-
-### Step 3: What the Assistant Will Do
-
-1. **Verify the environment**: Confirms Windows 11 Pro edition and active configuration.
-2. **Review your preferences**: Asks which apps (e.g. Xbox, OneDrive, Copilot, Phone Link) you want kept vs. removed from [`PREFERENCES_CHECKLIST.md`](file:///C:/Debloat%20Windows%2011/PREFERENCES_CHECKLIST.md).
-3. **Establish safety**: Creates a system restore point and registry export in `Backups/`.
-4. **Implement modular scripts**: Creates transparent, fully-reversible `.ps1` and `.reg` scripts for telemetry, apps, services, and shell tweaks.
-5. **Zero Silent or Unapproved Decisions (Strict Mandate)**: Never make assumptions or dumb hidden decisions. If any package, background service, or setting is discovered that is not explicitly approved, discuss it with the user first with a 1-line description and get explicit permission.
+- [`README.md`](README.md) — Guiding principles, phase breakdown, and safety procedures.
+- [`Apply-Win11Debloat.ps1`](Apply-Win11Debloat.ps1) — All-in-one debloat runner.
+- [`01_Create_Safety_Baseline.ps1`](01_Create_Safety_Baseline.ps1) — System restore point & registry backup.
+- [`02_Apply_Privacy_And_Ads_Hardening.ps1`](02_Apply_Privacy_And_Ads_Hardening.ps1) — Telemetry & advertising ID disablement.
+- [`03_Remove_Bloatware_Apps.ps1`](03_Remove_Bloatware_Apps.ps1) — Safe UWP bloatware removal.
+- [`04_Apply_UI_And_Services.ps1`](04_Apply_UI_And_Services.ps1) — Background services and taskbar streamlining.
+- [`Run_All_Restore_Admin.cmd`](Run_All_Restore_Admin.cmd) — Complete 1-click rollback launcher.
+- [`Backups/`](Backups/) — Pre-debloat system state and registry exports.

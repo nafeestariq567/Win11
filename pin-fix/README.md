@@ -11,7 +11,7 @@ Tailored and verified on an **Acer Predator Laptop (Windows 11 Pro 64-bit)**.
 To resolve this issue immediately on any affected Windows 11 PC, open **PowerShell as Administrator** and paste:
 
 ```powershell
-irm https://raw.githubusercontent.com/nafeestariq567/Windows11-PIN-Fix/main/Fix_Windows_Hello_PIN.ps1 | iex
+irm https://raw.githubusercontent.com/nafeestariq567/Win11/main/pin-fix/Fix_Windows_Hello_PIN.ps1 | iex
 ```
 
 ---

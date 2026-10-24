@@ -11,7 +11,7 @@ Benchmarked against the top industry debloaters: **Sophia Script for Windows 11*
 To apply this entire debloat configuration on any fresh Windows install in seconds without cloning the repository, open **PowerShell as Administrator** and paste:
 
 ```powershell
-irm https://raw.githubusercontent.com/nafeestariq567/Win11Debloat/main/Apply-Win11Debloat.ps1 | iex
+irm https://raw.githubusercontent.com/nafeestariq567/Win11/main/win11-debloat/Apply-Win11Debloat.ps1 | iex
 ```
 
 ---
