@@ -1,0 +1,14 @@
+# Ignore machine-specific local registry dumps
+Backups/*.reg
+Backups/*.txt
+!Backups/.gitkeep
+
+# Windows system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Logs & temp
+*.log
+*.tmp
