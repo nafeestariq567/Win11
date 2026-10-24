@@ -50,15 +50,12 @@ flowchart TD
      - [`taskbar-sleep-fix/`](taskbar-sleep-fix/): Taskbar icons disappearing or turning transparent/blank after sleep, GPU PCIe wake latency (Event 141), icon cache rebuilds, shell reloads.
      - [`win11-debloat/`](win11-debloat/): OS debloat, telemetry hardening, Cortana/ads disablement, provisioned AppX removal, background service tweaks, and baseline safety backups.
      - [`brave-debloat/`](brave-debloat/): Brave Browser policies, rewards, crypto wallet, VPN hooks, and sponsored clutter.
-   - **New Windows 11 Tasks:**
-     - If the user's task does NOT fit the existing modules (e.g., Audio/DPC latency fix, Bluetooth power management, HDR calibration, Windows Update troubleshooting):
-     - **Do NOT clutter the root folder.** Create a new dedicated subfolder:
-       `C:\Win11\<new-task-name>\`
-     - Inside that folder, create:
-       - `README.md` (Forensic analysis, root cause, user instructions, 1-liner command)
-       - Automated PowerShell/CMD repair scripts
-       - `assets/` (screenshots or logs)
-     - Update the master table in root [`README.md`](README.md) and [`START_HERE.md`](START_HERE.md).
+   - **Handling New Windows 11 Tasks:**
+     - **DO NOT create a new folder for every small thing.** Quick diagnostics, one-off fixes, small configuration adjustments, and minor questions must NOT generate new subfolders.
+     - **Only create a new subfolder if:**
+       1. The user explicitly requests creating a dedicated subfolder/project, OR
+       2. You determine that a task is large, complex, and warrants its own standalone toolkit—in which case, **ASK THE USER EXPLICITLY for approval before creating any new folder**.
+     - When approved by the user, create `C:\Win11\<new-task-name>\` with its own scripts, documentation, and assets, and register it in root [`README.md`](README.md).
 
 3. **Step 3: Root vs Subfolder Separation of Concerns:**
    - **Root (`C:\Win11\`):** ONLY holds global system specs (`SYSTEM_SPECS.md`), AI operating protocol (`START_HERE.md`), and the master suite index (`README.md`).
