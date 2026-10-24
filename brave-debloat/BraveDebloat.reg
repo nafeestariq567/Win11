@@ -1,0 +1,120 @@
+Windows Registry Editor Version 5.00
+
+; ==============================================================================
+; Comprehensive Brave & Brave Beta Debloat Configuration
+; Tailored to your exact selections (Brave Origin + OSFV Extreme fine-tuned):
+;
+; DISABLED (Bloat, Telemetry, and Clutter):
+; - Brave Rewards & BAT
+; - Brave Wallet (Web3)
+; - Brave VPN
+; - Brave News & New Tab Cards & Media Recommendations
+; - Brave Talk
+; - IPFS Protocol
+; - Tor Private Windows
+; - Brave Telemetry, Stats Ping, P3A, and Web Discovery Project
+; - Chromium Metrics & URL-Keyed Data Collection
+; - Background Mode (browser fully terminates on exit)
+; - Shopping List, Coupons, and Price Tracking
+; - Built-in Password Manager (external manager used)
+; - Brave Playlist
+; - Wayback Machine 404 prompts
+; - Google Search Side Panel
+; - Promotions, Promotional Tabs, and Browser Labs
+; - Website Payment Method Probing
+;
+; KEPT ACTIVE (Per User Request):
+; - Brave Leo AI (Chat, Page Summaries, and Q&A)
+; - Brave Email Aliases (Burner email generation)
+; - Brave Speedreader (Distraction-free article reader)
+; - QR Code Generator (Sharing links to mobile)
+;
+; ENHANCED PRIVACY SHIELDS ENFORCED:
+; - De-AMP (Bypass Google AMP to original publisher)
+; - Bounce Tracking Debouncing
+; - Global Privacy Control (GPC signal)
+; - Tracking Query Parameter Filtering (strip utm_*, fbclid)
+; - Language Fingerprint Reduction
+; ==============================================================================
+
+; --- MACHINE-WIDE POLICIES ---
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\BraveSoftware\Brave]
+; Core Bloat Disablement
+"BraveRewardsDisabled"=dword:00000001
+"BraveWalletDisabled"=dword:00000001
+"BraveVPNDisabled"=dword:00000001
+"BraveNewsDisabled"=dword:00000001
+"BraveTalkDisabled"=dword:00000001
+"IPFSEnabled"=dword:00000000
+"TorDisabled"=dword:00000001
+"BravePlaylistEnabled"=dword:00000000
+"BraveWaybackMachineEnabled"=dword:00000000
+
+; UI & Clutter Disablement
+"NTPCardsVisible"=dword:00000000
+"MediaRecommendationsEnabled"=dword:00000000
+"GoogleSearchSidePanelEnabled"=dword:00000000
+"PromotionsEnabled"=dword:00000000
+"PromotionalTabsEnabled"=dword:00000000
+"BrowserLabsEnabled"=dword:00000000
+"ShoppingListEnabled"=dword:00000000
+"PaymentMethodQueryEnabled"=dword:00000000
+"PasswordManagerEnabled"=dword:00000000
+"BackgroundModeEnabled"=dword:00000000
+
+; Telemetry Disablement
+"BraveStatsPingEnabled"=dword:00000000
+"BraveP3AEnabled"=dword:00000000
+"BraveWebDiscoveryEnabled"=dword:00000000
+"MetricsReportingEnabled"=dword:00000000
+"UrlKeyedAnonymizedDataCollectionEnabled"=dword:00000000
+
+; User Preferred Features KEPT ACTIVE
+"BraveAIChatEnabled"=dword:00000001
+"EmailAliasesEnabled"=dword:00000001
+"BraveSpeedreaderEnabled"=dword:00000001
+"QRCodeGeneratorEnabled"=dword:00000001
+
+; Anti-Tracking Protections Enforced
+"BraveDeAmpEnabled"=dword:00000001
+"BraveDebouncingEnabled"=dword:00000001
+"BraveGlobalPrivacyControlEnabled"=dword:00000001
+"BraveTrackingQueryParametersFilteringEnabled"=dword:00000001
+"BraveReduceLanguageEnabled"=dword:00000001
+
+
+; --- CURRENT USER POLICIES ---
+[HKEY_CURRENT_USER\SOFTWARE\Policies\BraveSoftware\Brave]
+"BraveRewardsDisabled"=dword:00000001
+"BraveWalletDisabled"=dword:00000001
+"BraveVPNDisabled"=dword:00000001
+"BraveNewsDisabled"=dword:00000001
+"BraveTalkDisabled"=dword:00000001
+"IPFSEnabled"=dword:00000000
+"TorDisabled"=dword:00000001
+"BravePlaylistEnabled"=dword:00000000
+"BraveWaybackMachineEnabled"=dword:00000000
+"NTPCardsVisible"=dword:00000000
+"MediaRecommendationsEnabled"=dword:00000000
+"GoogleSearchSidePanelEnabled"=dword:00000000
+"PromotionsEnabled"=dword:00000000
+"PromotionalTabsEnabled"=dword:00000000
+"BrowserLabsEnabled"=dword:00000000
+"ShoppingListEnabled"=dword:00000000
+"PaymentMethodQueryEnabled"=dword:00000000
+"PasswordManagerEnabled"=dword:00000000
+"BackgroundModeEnabled"=dword:00000000
+"BraveStatsPingEnabled"=dword:00000000
+"BraveP3AEnabled"=dword:00000000
+"BraveWebDiscoveryEnabled"=dword:00000000
+"MetricsReportingEnabled"=dword:00000000
+"UrlKeyedAnonymizedDataCollectionEnabled"=dword:00000000
+"BraveAIChatEnabled"=dword:00000001
+"EmailAliasesEnabled"=dword:00000001
+"BraveSpeedreaderEnabled"=dword:00000001
+"QRCodeGeneratorEnabled"=dword:00000001
+"BraveDeAmpEnabled"=dword:00000001
+"BraveDebouncingEnabled"=dword:00000001
+"BraveGlobalPrivacyControlEnabled"=dword:00000001
+"BraveTrackingQueryParametersFilteringEnabled"=dword:00000001
+"BraveReduceLanguageEnabled"=dword:00000001

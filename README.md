@@ -8,11 +8,12 @@ Curated and verified on an **Acer Predator Laptop (Windows 11 Pro 64-bit, Build 
 
 ## 🧭 Repository Index & Quick Launch
 
-| Toolkit | Description | Standalone Repo | 1-Liner Quick Fix |
+| Module | Description | Standalone Repo | 1-Liner Quick Fix / Run |
 |---|---|---|---|
 | **[Taskbar Sleep Fix](taskbar-sleep-fix/)** | Fixes taskbar icons turning blank/invisible after system sleep on multi-GPU (Intel + NVIDIA) & mixed-refresh (144Hz + 60Hz) setups. | [Windows11-Taskbar-Sleep-Fix](https://github.com/nafeestariq567/Windows11-Taskbar-Sleep-Fix) | `irm https://raw.githubusercontent.com/nafeestariq567/Windows11-Taskbar-Sleep-Fix/main/Fix_Taskbar_Sleep_Icons.ps1 \| iex` |
 | **[PIN Corruption Resolver](pin-fix/)** | Fixes recurring Windows Hello PIN unavailability (`0xD000A002`, Event ID 7002) triggered by 3-hour sleep-to-hibernate resume crashes. | [Windows11-PIN-Fix](https://github.com/nafeestariq567/Windows11-PIN-Fix) | `irm https://raw.githubusercontent.com/nafeestariq567/Windows11-PIN-Fix/main/Fix_Windows_Hello_PIN.ps1 \| iex` |
-| **[Win11 Debloat Suite](debloat/)** | Modular, safety-first debloat pipeline: safety baseline, privacy/telemetry hardening, bloatware purge, and service optimization. | [Win11Debloat](https://github.com/nafeestariq567/Win11Debloat) | `irm https://raw.githubusercontent.com/nafeestariq567/Win11Debloat/main/Apply-Win11Debloat.ps1 \| iex` |
+| **[Win11 Debloat Suite](win11-debloat/)** | Modular, safety-first debloat pipeline: safety baseline, privacy/telemetry hardening, bloatware purge, and service optimization. | [Win11Debloat](https://github.com/nafeestariq567/Win11Debloat) | `irm https://raw.githubusercontent.com/nafeestariq567/Win11Debloat/main/Apply-Win11Debloat.ps1 \| iex` |
+| **[Brave Browser Debloat](brave-debloat/)** | Privacy-first debloater and telemetry hardener for Brave and Brave Beta on Windows 11. | [BraveDebloat](https://github.com/nafeestariq567/BraveDebloat) | `irm https://raw.githubusercontent.com/nafeestariq567/BraveDebloat/main/Apply-BraveDebloat.ps1 \| iex` |
 
 ---
 
@@ -41,17 +42,15 @@ Curated and verified on an **Acer Predator Laptop (Windows 11 Pro 64-bit, Build 
   - Sets `HIBERNATEIDLE` to `0` (Never) on AC and DC to neutralize the crash trigger.
   - Launches clean PIN provisioning.
 
-### 3. [Windows 11 Debloat Suite (`debloat/`)](debloat/)
+### 3. [Windows 11 Debloat Suite (`win11-debloat/`)](win11-debloat/)
 - **Phase 1: Safety Baseline:** Creates System Restore Point, exports registry backups, and catalogs installed packages.
 - **Phase 2: Privacy & Telemetry Hardening:** Disables diagnostic telemetry, Cortana, advertising ID, Feedback Hub, and telemetry scheduled tasks.
 - **Phase 3: Bloatware Purge:** Safely uninstalls non-essential preinstalled UWP provisioned packages and OEM bloat.
 - **Phase 4: UI & Service Optimization:** Re-aligns taskbar, disables background app resource hogs, and streamlines context menus. Full 1-click rollback scripts included.
 
----
-
-## 🔗 Related Projects
-
-- **Brave Browser Debloat:** [`https://github.com/nafeestariq567/BraveDebloat`](https://github.com/nafeestariq567/BraveDebloat) — Privacy hardening and telemetry removal for Brave Browser on Windows 11.
+### 4. [Brave Browser Debloat (`brave-debloat/`)](brave-debloat/)
+- Strips out telemetry, Brave Rewards/Wallet/VPN background hooks, sponsored images, and unnecessary bloat services while preserving full browsing performance and extension compatibility.
+- Includes automated 1-click installer and rollback scripts.
 
 ---
 

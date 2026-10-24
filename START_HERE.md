@@ -11,8 +11,10 @@ Welcome to the **Windows 11 Master Suite (`Win11`)**. This repository consolidat
   - Standalone GitHub: [`https://github.com/nafeestariq567/Windows11-Taskbar-Sleep-Fix`](https://github.com/nafeestariq567/Windows11-Taskbar-Sleep-Fix)
 - [`pin-fix/`](pin-fix/) — Standalone toolkit for the Windows Hello PIN corruption bug (`0xD000A002`).
   - Standalone GitHub: [`https://github.com/nafeestariq567/Windows11-PIN-Fix`](https://github.com/nafeestariq567/Windows11-PIN-Fix)
-- [`debloat/`](debloat/) — Standalone modular debloat and telemetry hardening pipeline.
+- [`win11-debloat/`](win11-debloat/) — Standalone modular debloat and telemetry hardening pipeline.
   - Standalone GitHub: [`https://github.com/nafeestariq567/Win11Debloat`](https://github.com/nafeestariq567/Win11Debloat)
+- [`brave-debloat/`](brave-debloat/) — Privacy-first debloater and telemetry hardener for Brave Browser.
+  - Standalone GitHub: [`https://github.com/nafeestariq567/BraveDebloat`](https://github.com/nafeestariq567/BraveDebloat)
 
 ---
 
@@ -27,4 +29,7 @@ irm https://raw.githubusercontent.com/nafeestariq567/Windows11-PIN-Fix/main/Fix_
 
 # 3. Run Win11 Debloat Suite
 irm https://raw.githubusercontent.com/nafeestariq567/Win11Debloat/main/Apply-Win11Debloat.ps1 | iex
+
+# 4. Run Brave Browser Debloat
+irm https://raw.githubusercontent.com/nafeestariq567/BraveDebloat/main/Apply-BraveDebloat.ps1 | iex
 ```
