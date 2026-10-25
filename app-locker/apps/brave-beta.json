@@ -1,0 +1,10 @@
+{
+    "AppKey":  "brave-beta",
+    "DisplayName":  "Brave Beta",
+    "ShortcutPath":  "C:\\Users\\Nafees\\Desktop\\Brave Beta.lnk",
+    "TargetPath":  "C:\\Program Files\\BraveSoftware\\Brave-Browser-Beta\\Application\\brave.exe",
+    "Arguments":  "--proxy-server=\"socks5://127.0.0.1:40000\"",
+    "WorkingDirectory":  "C:\\Program Files\\BraveSoftware\\Brave-Browser-Beta\\Application",
+    "IconLocation":  "C:\\Program Files\\BraveSoftware\\Brave-Browser-Beta\\Application\\brave.exe,9",
+    "LockedAt":  "2026-10-25T09:27:12.7966666+05:00"
+}

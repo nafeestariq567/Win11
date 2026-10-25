@@ -1,0 +1,3 @@
+# Private user configurations and credentials
+config/master.hash
+apps/*.original.lnk

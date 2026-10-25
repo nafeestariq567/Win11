@@ -12,6 +12,7 @@ A centralized, forensic-grade engineering repository containing all diagnostic r
 | **[`pin-fix/`](pin-fix/)** | Fixes recurring Windows Hello PIN unavailability (`0xD000A002`, Event ID 7002) triggered by 3-hour sleep-to-hibernate resume crashes. | `irm https://raw.githubusercontent.com/nafeestariq567/Win11/main/pin-fix/Fix_Windows_Hello_PIN.ps1 \| iex` |
 | **[`win11-debloat/`](win11-debloat/)** | Modular, safety-first debloat pipeline: safety baseline, privacy/telemetry hardening, bloatware purge, and service optimization. | `irm https://raw.githubusercontent.com/nafeestariq567/Win11/main/win11-debloat/Apply-Win11Debloat.ps1 \| iex` |
 | **[`brave-debloat/`](brave-debloat/)** | Privacy-first debloater and telemetry hardener for Brave and Brave Beta on Windows 11. | `irm https://raw.githubusercontent.com/nafeestariq567/Win11/main/brave-debloat/Apply-BraveDebloat.ps1 \| iex` |
+| **[`app-locker/`](app-locker/)** | Universal Desktop App Locker: password-protects any desktop app shortcut (e.g. Brave Beta) with salted SHA-256 master password dialog. | `powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Win11\app-locker\Lock-App.ps1"` |
 
 ---
 
@@ -50,12 +51,23 @@ C:\Win11\
 │   ├── Run_All_Restore_Admin.cmd      # Complete 1-click restore wrapper
 │   └── Backups/                       # Pre-debloat system state backups
 │
-└── brave-debloat/                     # Brave Browser Debloat Suite
-    ├── README.md                      # Policy breakdown & user choices
-    ├── Apply-BraveDebloat.ps1         # Policy enforcer script
-    ├── BraveDebloat.reg               # Direct registry policy tweaks
-    ├── BraveRestore.reg               # Full restoration registry file
-    └── Run-Debloat.cmd                # 1-click execution wrapper
+├── brave-debloat/                     # Brave Browser Debloat Suite
+│   ├── README.md                      # Policy breakdown & user choices
+│   ├── Apply-BraveDebloat.ps1         # Policy enforcer script
+│   ├── BraveDebloat.reg               # Direct registry policy tweaks
+│   ├── BraveRestore.reg               # Full restoration registry file
+│   └── Run-Debloat.cmd                # 1-click execution wrapper
+│
+└── app-locker/                        # Universal Desktop App Locker
+    ├── README.md                      # Architecture & usage instructions
+    ├── START_HERE.md                  # Module quick start
+    ├── Launch-App.ps1                 # Fluent dark WinForms password dialog & launcher
+    ├── Launch-Silent.vbs              # Silent execution stub (zero console flicker)
+    ├── Lock-App.ps1                   # Shortcut inspector & locker
+    ├── Unlock-App.ps1                 # 1-click shortcut restorer
+    ├── Reset-Password.ps1             # Master password manager
+    ├── config/                        # Salted SHA-256 master hash
+    └── apps/                          # App profiles & backup .lnk files
 ```
 
 ### Separation of Concerns:

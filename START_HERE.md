@@ -25,6 +25,7 @@ flowchart TD
     Evaluate -->|"Taskbar / Sleep Icons / TDR / Shell"| TaskbarMod["Navigate to taskbar-sleep-fix/"]
     Evaluate -->|"Windows Services / Telemetry / UWP Debloat"| DebloatMod["Navigate to win11-debloat/"]
     Evaluate -->|"Brave Browser Policies / Bloat"| BraveMod["Navigate to brave-debloat/"]
+    Evaluate -->|"Desktop Shortcut / App Locking / Password"| LockMod["Navigate to app-locker/"]
     
     Evaluate -->|"New Unrelated Windows 11 Task"| NewMod["3. Create new dedicated subfolder C:\Win11/<task-name>/"]
     
@@ -50,6 +51,7 @@ flowchart TD
      - [`taskbar-sleep-fix/`](taskbar-sleep-fix/): Taskbar icons disappearing or turning transparent/blank after sleep, GPU PCIe wake latency (Event 141), icon cache rebuilds, shell reloads.
      - [`win11-debloat/`](win11-debloat/): OS debloat, telemetry hardening, Cortana/ads disablement, provisioned AppX removal, background service tweaks, and baseline safety backups.
      - [`brave-debloat/`](brave-debloat/): Brave Browser policies, rewards, crypto wallet, VPN hooks, and sponsored clutter.
+      - [`app-locker/`](app-locker/): Universal Desktop App Locker, password-protecting desktop application shortcuts (e.g. Brave Beta) via salted SHA-256 WinForms dialogs.
    - **Handling New Windows 11 Tasks:**
      - **DO NOT create a new folder for every small thing.** Quick diagnostics, one-off fixes, small configuration adjustments, and minor questions must NOT generate new subfolders.
      - **Only create a new subfolder if:**
@@ -80,3 +82,4 @@ irm https://raw.githubusercontent.com/nafeestariq567/Win11/main/win11-debloat/Ap
 # 4. Brave Browser Debloat Suite
 irm https://raw.githubusercontent.com/nafeestariq567/Win11/main/brave-debloat/Apply-BraveDebloat.ps1 | iex
 ```
+
