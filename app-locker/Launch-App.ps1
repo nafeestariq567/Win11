@@ -4,10 +4,11 @@ param (
     [string]$AppKey
 )
 
-Add-Type -AssemblyName System.Windows.Forms
-Add-Type -AssemblyName System.Drawing
+try {
+    Add-Type -AssemblyName System.Windows.Forms
+    Add-Type -AssemblyName System.Drawing
 
-[System.Windows.Forms.Application]::EnableVisualStyles()
+    [System.Windows.Forms.Application]::EnableVisualStyles()
 
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 $configDir = Join-Path $scriptDir "config"
@@ -65,8 +66,15 @@ function Show-SetupMasterPasswordDialog {
     $form.MaximizeBox = $false
     $form.MinimizeBox = $false
     $form.TopMost = $true
+    $form.ShowInTaskbar = $true
     $form.BackColor = [System.Drawing.Color]::FromArgb(32, 32, 32)
     $form.ForeColor = [System.Drawing.Color]::White
+
+    $form.Add_Shown({
+        $form.Activate()
+        $form.BringToFront()
+        $txtP1.Focus()
+    })
 
     $fontRegular = New-Object System.Drawing.Font("Segoe UI", 9.5)
     $fontBold = New-Object System.Drawing.Font("Segoe UI", 10.5, [System.Drawing.FontStyle]::Bold)
@@ -184,7 +192,7 @@ function Show-SetupMasterPasswordDialog {
         if (-not (Test-Path $configDir)) {
             New-Item -ItemType Directory -Path $configDir -Force | Out-Null
         }
-        Set-Content -Path $hashFile -Value "$hexSalt:$hash" -Force
+        Set-Content -Path $hashFile -Value "${hexSalt}:${hash}" -Force
 
         $form.DialogResult = [System.Windows.Forms.DialogResult]::OK
         $form.Close()
@@ -205,8 +213,15 @@ function Show-UnlockDialog([string]$appName, [string]$hexSalt, [string]$storedHa
     $form.MaximizeBox = $false
     $form.MinimizeBox = $false
     $form.TopMost = $true
+    $form.ShowInTaskbar = $true
     $form.BackColor = [System.Drawing.Color]::FromArgb(30, 30, 30)
     $form.ForeColor = [System.Drawing.Color]::White
+
+    $form.Add_Shown({
+        $form.Activate()
+        $form.BringToFront()
+        $txtPwd.Focus()
+    })
 
     # Try extracting app icon
     try {
@@ -316,33 +331,35 @@ function Show-UnlockDialog([string]$appName, [string]$hexSalt, [string]$storedHa
 
 # --- MAIN EXECUTION FLOW ---
 
-# If master password does not exist yet, prompt to set it
-if (-not (Test-Path $hashFile)) {
+$isInitialSetup = -not (Test-Path $hashFile)
+
+if ($isInitialSetup) {
     $res = Show-SetupMasterPasswordDialog
     if ($res -ne [System.Windows.Forms.DialogResult]::OK) {
         exit 0
     }
+    # Once user sets password during initial setup, unlock immediately
+    $unlockResult = [System.Windows.Forms.DialogResult]::OK
+} else {
+    # Read stored master hash
+    $hashContent = (Get-Content -Path $hashFile -Raw).Trim()
+    $parts = $hashContent -split ":"
+    if ($parts.Length -ne 2) {
+        [System.Windows.Forms.MessageBox]::Show(
+            "Master password file is invalid or corrupted. Please run Reset-Password.ps1.",
+            "App Locker Error",
+            [System.Windows.Forms.MessageBoxButtons]::OK,
+            [System.Windows.Forms.MessageBoxIcon]::Error
+        )
+        exit 1
+    }
+
+    $hexSalt = $parts[0]
+    $storedHash = $parts[1]
+    $appName = if ($appData.DisplayName) { $appData.DisplayName } else { $AppKey }
+
+    $unlockResult = Show-UnlockDialog -appName $appName -hexSalt $hexSalt -storedHash $storedHash
 }
-
-# Read stored master hash
-$hashContent = (Get-Content -Path $hashFile -Raw).Trim()
-$parts = $hashContent -split ":"
-if ($parts.Length -ne 2) {
-    [System.Windows.Forms.MessageBox]::Show(
-        "Master password file is invalid or corrupted. Please run Reset-Password.ps1.",
-        "App Locker Error",
-        [System.Windows.Forms.MessageBoxButtons]::OK,
-        [System.Windows.Forms.MessageBoxIcon]::Error
-    )
-    exit 1
-}
-
-$hexSalt = $parts[0]
-$storedHash = $parts[1]
-
-$appName = if ($appData.DisplayName) { $appData.DisplayName } else { $AppKey }
-
-$unlockResult = Show-UnlockDialog -appName $appName -hexSalt $hexSalt -storedHash $storedHash
 
 if ($unlockResult -eq [System.Windows.Forms.DialogResult]::OK) {
     # Launch real target executable with preserved arguments and working directory
@@ -368,4 +385,14 @@ if ($unlockResult -eq [System.Windows.Forms.DialogResult]::OK) {
             [System.Windows.Forms.MessageBoxIcon]::Error
         )
     }
+}
+} catch {
+    $err = "$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss')) - ERROR: $($_.Exception.ToString())`r`n"
+    [System.IO.File]::AppendAllText((Join-Path $scriptDir "debug.log"), $err)
+    [System.Windows.Forms.MessageBox]::Show(
+        "App Locker encountered an error: $($_.Exception.Message)`nCheck debug.log for details.",
+        "App Locker Error",
+        [System.Windows.Forms.MessageBoxButtons]::OK,
+        [System.Windows.Forms.MessageBoxIcon]::Error
+    )
 }

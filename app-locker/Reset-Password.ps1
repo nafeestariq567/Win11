@@ -55,7 +55,7 @@ if ($choice -eq "1") {
     $hexSalt = [BitConverter]::ToString($salt).Replace('-', '').ToLower()
     $hexHash = [BitConverter]::ToString($hashBytes).Replace('-', '').ToLower()
 
-    Set-Content -Path $hashFile -Value "$hexSalt:$hexHash" -Force
+    Set-Content -Path $hashFile -Value "${hexSalt}:${hexHash}" -Force
     Write-Host "`n[OK] Master password successfully updated!" -ForegroundColor Green
 } else {
     Write-Host "Cancelled." -ForegroundColor Yellow
