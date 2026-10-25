@@ -8,7 +8,7 @@ A lightweight, zero-overhead desktop application locker for Windows 11. Protects
 
 - **Universal Application Support:** Works with any desktop shortcut (`.lnk`). Automatically extracts and preserves the target binary, working directory, and custom launch arguments (such as `--proxy-server="socks5://127.0.0.1:40000"` for Brave Beta).
 - **Zero Visual Disruption:** The desktop shortcut retains the exact same name and high-resolution icon. To anyone looking at your desktop, it looks completely original.
-- **Silent Launch (No Flashing Consoles):** Uses a background VBScript stub (`Launch-Silent.vbs`) to invoke the unlocker, ensuring zero black command prompt or PowerShell flicker.
+- **Native Zero-Console GUI (`AppLocker.exe`):** Compiled as a native Windows GUI subsystem binary (`/target:winexe`). Never opens a command prompt or console window, starts in < 30ms, and bypasses Windows scripting host limitations.
 - **Modern Fluent Dark GUI:** Presents a sleek, centered, dark-themed password dialog matching Windows 11 aesthetics.
 - **Cryptographic Security:** Passwords are never stored in plain text. Stored as a **salted SHA-256 hash** (`config/master.hash`).
 - **Fail-Safe & 100% Reversible:** Original `.lnk` shortcuts are backed up upon locking, allowing instant 1-click restoration to direct execution at any time.

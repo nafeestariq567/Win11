@@ -7,7 +7,7 @@ param (
 
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 $appsDir   = Join-Path $scriptDir "apps"
-$vbsPath   = Join-Path $scriptDir "Launch-Silent.vbs"
+$exePath   = Join-Path $scriptDir "AppLocker.exe"
 $desktop   = [Environment]::GetFolderPath("Desktop")
 
 if (-not (Test-Path $appsDir)) {
@@ -33,7 +33,7 @@ if ([string]::IsNullOrWhiteSpace($ShortcutName)) {
     for ($i = 0; $i -lt $allShortcuts.Count; $i++) {
         $name = $allShortcuts[$i].BaseName
         $target = $wsh.CreateShortcut($allShortcuts[$i].FullName)
-        $isLocked = ($target.Arguments -like "*Launch-Silent.vbs*")
+        $isLocked = ($target.TargetPath -like "*AppLocker.exe*" -or $target.Arguments -like "*Launch-Silent.vbs*")
         $status = if ($isLocked) { "[ALREADY LOCKED]" } else { "" }
         $color = if ($isLocked) { "DarkYellow" } else { "White" }
         Write-Host ("  [{0,2}] {1,-35} {2}" -f ($i + 1), $name, $status) -ForegroundColor $color
@@ -78,7 +78,7 @@ $lnkPath = $selectedLnk.FullName
 $baseName = $selectedLnk.BaseName
 $shortcut = $wsh.CreateShortcut($lnkPath)
 
-if ($shortcut.Arguments -like "*Launch-Silent.vbs*") {
+if ($shortcut.TargetPath -like "*AppLocker.exe*" -or $shortcut.Arguments -like "*Launch-Silent.vbs*") {
     Write-Host "`n'$baseName' is already locked!" -ForegroundColor Yellow
     exit 0
 }
@@ -118,9 +118,9 @@ $appRecord = [PSCustomObject]@{
 $jsonPath = Join-Path $appsDir "$appKey.json"
 $appRecord | ConvertTo-Json -Depth 4 | Set-Content -Path $jsonPath -Force
 
-# Update the Desktop shortcut to point to Launch-Silent.vbs
-$shortcut.TargetPath       = "wscript.exe"
-$shortcut.Arguments        = "`"$vbsPath`" `"$appKey`""
+# Update the Desktop shortcut to point to AppLocker.exe
+$shortcut.TargetPath       = $exePath
+$shortcut.Arguments        = "`"$appKey`""
 $shortcut.WorkingDirectory = $scriptDir
 $shortcut.IconLocation     = $originalIcon
 $shortcut.Save()
