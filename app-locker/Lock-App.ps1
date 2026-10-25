@@ -33,7 +33,7 @@ if ([string]::IsNullOrWhiteSpace($ShortcutName)) {
     for ($i = 0; $i -lt $allShortcuts.Count; $i++) {
         $name = $allShortcuts[$i].BaseName
         $target = $wsh.CreateShortcut($allShortcuts[$i].FullName)
-        $isLocked = ($target.TargetPath -like "*AppLocker.exe*" -or $target.Arguments -like "*Launch-Silent.vbs*")
+        $isLocked = ($target.TargetPath -like "*AppLocker.exe*")
         $status = if ($isLocked) { "[ALREADY LOCKED]" } else { "" }
         $color = if ($isLocked) { "DarkYellow" } else { "White" }
         Write-Host ("  [{0,2}] {1,-35} {2}" -f ($i + 1), $name, $status) -ForegroundColor $color
@@ -78,7 +78,7 @@ $lnkPath = $selectedLnk.FullName
 $baseName = $selectedLnk.BaseName
 $shortcut = $wsh.CreateShortcut($lnkPath)
 
-if ($shortcut.TargetPath -like "*AppLocker.exe*" -or $shortcut.Arguments -like "*Launch-Silent.vbs*") {
+if ($shortcut.TargetPath -like "*AppLocker.exe*") {
     Write-Host "`n'$baseName' is already locked!" -ForegroundColor Yellow
     exit 0
 }

@@ -61,8 +61,8 @@ C:\Win11\
 └── app-locker/                        # Universal Desktop App Locker
     ├── README.md                      # Architecture & usage instructions
     ├── START_HERE.md                  # Module quick start
-    ├── Launch-App.ps1                 # Fluent dark WinForms password dialog & launcher
-    ├── Launch-Silent.vbs              # Silent execution stub (zero console flicker)
+    ├── AppLocker.cs                   # C# source code for native Windows GUI gatekeeper
+    ├── AppLocker.exe                  # Compiled native Windows GUI executable (/target:winexe)
     ├── Lock-App.ps1                   # Shortcut inspector & locker
     ├── Unlock-App.ps1                 # 1-click shortcut restorer
     ├── Reset-Password.ps1             # Master password manager

@@ -19,9 +19,8 @@ A lightweight, zero-overhead desktop application locker for Windows 11. Protects
 
 ```mermaid
 flowchart TD
-    User["User double-clicks Desktop Shortcut"] --> Silent["Launch-Silent.vbs (0ms background execution)"]
-    Silent --> PS["Launch-App.ps1 (WinForms Dark GUI)"]
-    PS --> CheckFirst{"Master Hash Exists?"}
+    User["User double-clicks Desktop Shortcut"] --> Native["AppLocker.exe (Native Windows GUI, <30ms)"]
+    Native --> CheckFirst{"Master Hash Exists?"}
     
     CheckFirst -->|"No (First Run)"| Setup["Prompt to set Master Password (Salted SHA-256)"]
     Setup --> CheckFirst
@@ -30,7 +29,7 @@ flowchart TD
     Dialog --> Input["User inputs password"]
     Input --> Validate{"Salted SHA-256 Match?"}
     
-    Validate -->|"Correct"| Start["Start-Process (Real Target + Preserved Args + WorkingDir)"]
+    Validate -->|"Correct"| Start["Process.Start (Real Target + Preserved Args + WorkingDir)"]
     Validate -->|"Wrong / Cancel"| Terminate["Exit immediately (0 processes launched, 0 leaks)"]
 ```
 
@@ -77,17 +76,17 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Win11\app-locker\Reset-P
 C:\Win11\app-locker\
 ├── README.md               # Documentation & architecture breakdown
 ├── START_HERE.md           # Quick start guide & AI router instructions
-├── Launch-App.ps1          # Universal modern WinForms password prompt & launcher
-├── Launch-Silent.vbs       # Silent execution stub (zero console flicker)
+├── AppLocker.cs            # C# source code for native Windows GUI gatekeeper
+├── AppLocker.exe           # Compiled native Windows GUI executable (/target:winexe)
 ├── Lock-App.ps1            # Auto-inspects desktop shortcuts, backs them up, & applies lock
 ├── Lock-App.cmd            # 1-click interactive lock launcher
 ├── Unlock-App.ps1          # Reverts locked shortcuts back to direct execution
 ├── Unlock-App.cmd          # 1-click interactive unlock launcher
 ├── Reset-Password.ps1      # Interactive master password manager
 ├── Reset-Password.cmd      # 1-click password reset launcher
-├── config/                 # Stores master password salt and SHA-256 hash
+├── config/                 # Stores master password salt and SHA-256 hash (git-ignored)
 │   └── master.hash
 └── apps/                   # Stores individual app JSON profiles and backup .lnk files
     ├── brave-beta.json
-    └── brave-beta.original.lnk
+    └── brave-beta.original.lnk (git-ignored)
 ```

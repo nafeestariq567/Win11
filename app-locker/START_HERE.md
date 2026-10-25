@@ -15,7 +15,7 @@ When starting a new session in this module, the user will typically say:
 
 - **Lock App:** [`Lock-App.ps1`](Lock-App.ps1) (Interactive or `-ShortcutName <name>`)
 - **Unlock App:** [`Unlock-App.ps1`](Unlock-App.ps1) (Interactive or `-ShortcutName <name>`)
-- **Launch Gatekeeper:** [`Launch-App.ps1`](Launch-App.ps1) + [`Launch-Silent.vbs`](Launch-Silent.vbs)
+- **Launch Gatekeeper:** [`AppLocker.exe`](AppLocker.exe) (Native Windows GUI gatekeeper compiled from [`AppLocker.cs`](AppLocker.cs))
 - **Password Reset:** [`Reset-Password.ps1`](Reset-Password.ps1)
 
 ---
