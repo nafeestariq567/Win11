@@ -9,7 +9,7 @@ A centralized, forensic-grade engineering repository containing all diagnostic r
 | Module | Description | 1-Liner Quick Fix / Run Command |
 |---|---|---|
 | **[`taskbar-sleep-fix/`](taskbar-sleep-fix/)** | Fixes taskbar icons turning blank/invisible after system sleep on multi-GPU (Intel + NVIDIA) & mixed-refresh (144Hz + 60Hz) setups. | `irm https://raw.githubusercontent.com/nafeestariq567/Win11/main/taskbar-sleep-fix/Fix_Taskbar_Sleep_Icons.ps1 \| iex` |
-| **[`pin-fix/`](pin-fix/)** | Fixes recurring Windows Hello PIN unavailability (`0xD000A002`, Event ID 7002) triggered by 3-hour sleep-to-hibernate resume crashes. | `irm https://raw.githubusercontent.com/nafeestariq567/Win11/main/pin-fix/Fix_Windows_Hello_PIN.ps1 \| iex` |
+| **[`pin-fix/`](pin-fix/)** | Fixes recurring Windows Hello PIN unavailability (`0xD000A002`, Event ID 7002) caused by dying-battery hibernate crashes, NVMe write brownouts, and TPM hardware dictionary attack lockout. | `irm https://raw.githubusercontent.com/nafeestariq567/Win11/main/pin-fix/Fix_Windows_Hello_PIN.ps1 \| iex` |
 | **[`win11-debloat/`](win11-debloat/)** | Modular, safety-first debloat pipeline: safety baseline, privacy/telemetry hardening, bloatware purge, and service optimization. | `irm https://raw.githubusercontent.com/nafeestariq567/Win11/main/win11-debloat/Apply-Win11Debloat.ps1 \| iex` |
 | **[`brave-debloat/`](brave-debloat/)** | Privacy-first debloater and telemetry hardener for Brave and Brave Beta on Windows 11. | `irm https://raw.githubusercontent.com/nafeestariq567/Win11/main/brave-debloat/Apply-BraveDebloat.ps1 \| iex` |
 | **[`app-locker/`](app-locker/)** | Universal Desktop App Locker: password-protects any desktop app shortcut (e.g. Brave Beta) with salted SHA-256 master password dialog. | `powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Win11\app-locker\Lock-App.ps1"` |
@@ -34,7 +34,7 @@ C:\Win11\
 │   └── assets/                        # Multi-monitor & community bug screenshots
 │
 ├── pin-fix/                           # Windows Hello PIN Corruption Resolver
-│   ├── README.md                      # Event 7002 & 3-hour hibernate crash breakdown
+│   ├── README.md                      # Forensic analysis, TPM lockout & critical battery crash breakdown
 │   ├── Fix_Windows_Hello_PIN.ps1      # Automated cryptographic key & power repair script
 │   ├── Run_Fix_PIN_Admin.cmd          # Self-elevating 1-click execution wrapper
 │   ├── CONTEXT_AND_TRANSCRIPT.md      # Deep technical investigation history

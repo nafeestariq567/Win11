@@ -28,7 +28,7 @@ Write-Host "   Windows 11 Master Debloat Suite (Developer Edition)    " -Foregro
 Write-Host "==========================================================" -ForegroundColor Cyan
 Write-Host " Target OS: Windows 11 Pro 64-bit" -ForegroundColor Gray
 Write-Host " Profile: Developer / Acer Predator Laptop" -ForegroundColor Gray
-Write-Host " Source: https://github.com/nafeestariq567/Win11Debloat" -ForegroundColor Gray
+Write-Host " Source: https://github.com/nafeestariq567/Win11/tree/main/win11-debloat" -ForegroundColor Gray
 Write-Host ""
 
 function Set-RegistryValueSafe {

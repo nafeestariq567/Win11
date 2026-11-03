@@ -12,7 +12,7 @@
     3. Cleanly restarts Explorer.
 .NOTES
     Author: Nafees Tariq (nafeestariq567)
-    Repository: https://github.com/nafeestariq567/Windows11-Taskbar-Sleep-Fix
+    Repository: https://github.com/nafeestariq567/Win11/tree/main/taskbar-sleep-fix
 #>
 
 [CmdletBinding()]

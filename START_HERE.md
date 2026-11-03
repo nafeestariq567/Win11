@@ -47,7 +47,7 @@ flowchart TD
 
 2. **Step 2: Task Classification & Routing:**
    - **Existing Modules:**
-     - [`pin-fix/`](pin-fix/): Windows Hello PIN unavailability, Error `0xD000A002`, Event 7002, `Ngc` container keys, TPM 2.0 unwrap, 3-hour hibernate crash.
+     - [`pin-fix/`](pin-fix/): Windows Hello PIN unavailability, Error `0xD000A002`, Event 7002, `Ngc` container keys, TPM 2.0 dictionary attack lockout, and critical battery hibernate crash prevention.
      - [`taskbar-sleep-fix/`](taskbar-sleep-fix/): Taskbar icons disappearing or turning transparent/blank after sleep, GPU PCIe wake latency (Event 141), icon cache rebuilds, shell reloads.
      - [`win11-debloat/`](win11-debloat/): OS debloat, telemetry hardening, Cortana/ads disablement, provisioned AppX removal, background service tweaks, and baseline safety backups.
      - [`brave-debloat/`](brave-debloat/): Brave Browser policies, rewards, crypto wallet, VPN hooks, and sponsored clutter.

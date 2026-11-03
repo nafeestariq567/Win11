@@ -1,0 +1,10 @@
+{
+    "AppKey":  "chrome-sec-exe",
+    "DisplayName":  "chrome-sec.exe",
+    "ShortcutPath":  "C:\\Users\\Nafees\\Desktop\\chrome-sec.exe.lnk",
+    "TargetPath":  "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "Arguments":  "--user-data-dir=\"C:\\Users\\Nafees\\AppData\\Local\\Google\\Chrome Secondary\"",
+    "WorkingDirectory":  "C:\\Program Files\\Google\\Chrome\\Application",
+    "IconLocation":  "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe,4",
+    "LockedAt":  "2026-10-26T06:23:21.4695044+05:00"
+}
