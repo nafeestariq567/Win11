@@ -7,3 +7,4 @@ $RECYCLE.BIN/
 # Logs & temp
 *.log
 *.tmp
+battery-report.html

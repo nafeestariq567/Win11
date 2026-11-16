@@ -37,6 +37,10 @@ C:\Win11\
 │   ├── README.md                      # Forensic analysis, TPM lockout & critical battery crash breakdown
 │   ├── Fix_Windows_Hello_PIN.ps1      # Automated cryptographic key & power repair script
 │   ├── Run_Fix_PIN_Admin.cmd          # Self-elevating 1-click execution wrapper
+│   ├── Watchdog_Battery_Sleep.ps1     # 24h sleep cap + 10% low-battery watchdog script
+│   ├── Install_Battery_Watchdog.ps1   # Watchdog scheduler & RTC wake installer
+│   ├── Install_Battery_Watchdog_Admin.cmd # 1-click self-elevating watchdog installer
+│   ├── Uninstall_Battery_Watchdog.ps1 # Watchdog uninstaller
 │   ├── CONTEXT_AND_TRANSCRIPT.md      # Deep technical investigation history
 │   ├── START_HERE.md                  # Module quick start
 │   └── assets/                        # Original error photo

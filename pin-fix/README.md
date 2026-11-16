@@ -107,6 +107,25 @@ When you attempt to change or remove your PIN via `Settings > Accounts > Sign-in
 
 ---
 
+## 🛡️ The Battery Sleep Watchdog (24h Sleep Cap + 10% Safety Net)
+
+Because Hibernation is disabled (`powercfg -h off`) to prevent NVMe write crashes, a laptop left in ACPI S3 sleep on battery drains ~1.1 Watts continuously to refresh 32 GB RAM. If left sleeping unplugged across a long weekend or on a low battery, it could drain to 0%, cutting power dirty and locking the TPM.
+
+The **Battery Sleep Watchdog** ([`Watchdog_Battery_Sleep.ps1`](Watchdog_Battery_Sleep.ps1)) permanently solves this:
+
+### ⚙️ How It Works:
+1. **Uninterrupted Daily Routine (14–18 Hours):** If you put your laptop to sleep with a healthy battery, the watchdog leaves your sleep **100% uninterrupted**. It will never shut down on your daily routine.
+2. **24-Hour Continuous Sleep Cap:** If left sleeping on battery for **24 continuous hours** (e.g. over a weekend), the watchdog wakes via RTC timer and cleanly executes `shutdown.exe /s /t 30` to preserve the remaining battery.
+3. **10% Low-Battery Safety Net:** If you ever put the laptop to sleep on a low battery (like 27%), the moment the battery drops to **10%**, the watchdog wakes and shuts down cleanly **before** the battery can hit 0% and trip an emergency cutoff.
+4. **Zero Overhead on AC:** When connected to the charger, the watchdog is completely dormant.
+
+### 📥 Installation & Management:
+* **Install / Activate:** Right-click [`Install_Battery_Watchdog_Admin.cmd`](Install_Battery_Watchdog_Admin.cmd) and select **Run as administrator** (or run `Install_Battery_Watchdog.ps1`).
+* **Uninstall:** Run [`Uninstall_Battery_Watchdog.ps1`](Uninstall_Battery_Watchdog.ps1) as administrator.
+* **View Activity:** Live logs are maintained in [`watchdog.log`](watchdog.log).
+
+---
+
 ## 🚀 Alternative Execution (1-Click Local Launcher)
 
 If you have cloned this repository locally:
